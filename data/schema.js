@@ -1,5 +1,6 @@
 import { resolvers } from './resolvers';
 import { makeExecutableSchema } from 'graphql-tools';
+import { client } from '../index'
 
 const typeDefs = `
   type User {
@@ -7,6 +8,7 @@ const typeDefs = `
     firstName: String
     lastName: String
     gender: Gender
+    password: String
     age: Int
     language: String
     email: String
@@ -30,12 +32,18 @@ const typeDefs = `
     lastName: String
     age: Int
     language: String
+    password: String  
     email: String
+  }
+  input loginInput {
+    username: String
+    password: String
   }
   type Mutation {
     createUser(input: userInput): User
     updateUser(id: ID): String
     deleteUser(id: ID): String
+    loginUser(input: loginInput): User
   }
 `;
 
